@@ -14,8 +14,13 @@ import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class Account {
     
+	private Long accountId;
+	private String accountNumber;
+	
     @NotBlank(message="First name is required")
     @Size(max=30)
 	private String firstName; 
@@ -27,6 +32,7 @@ public class Account {
     @NotNull(message="DOB is requried")
     @DateTimeFormat(pattern="MM/dd/yyyy")
     @Past(message="DOB cannot be in the future")
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="MM/dd/yyyy")
     private Date dob;
     
     //@NotBlank(message="SSN is required")
@@ -55,7 +61,19 @@ public class Account {
     @Digits(fraction=2, message="Please enter the minimum balance in this format: ###.##", integer = 6)
     @Positive
     private BigDecimal balance;
-    
+
+	public Long getAccountId() {
+		return accountId;
+	}
+	public void setAccountId(Long accountId) {
+		this.accountId = accountId;
+	}
+    public String getAccountNumber() {
+    	return accountNumber;
+    }
+    public void setAccountNumber(String accountNumber) {
+    	this.accountNumber = accountNumber;
+    }
 	public String getFirstName() {
 		return firstName;
 	}
